@@ -1,5 +1,3 @@
-// import React, { Component } from "react";
-// import PropTypes from "prop-types";
 import { ButtonAdd, Form, InputForm, Label } from "./ContactForm.styled";
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
@@ -30,7 +28,7 @@ export const ContactForm = () => {
             return;
     }
     };
-  
+
     const addContactToList = (name, number) => {
         if (
         contacts.find(

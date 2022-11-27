@@ -1,8 +1,6 @@
 import { ButtonDelete, ContactEl, NewContactsList } from './ContactList.styled';
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { getContacts, removeContact } from '../../redux/contactsSlice';
-// import { getFilter } from '../../redux/filterSlice';
 import { getFilter, getContacts } from '../../redux/selector';
 import { deleteTask } from "redux/contactsSlice";
 
@@ -11,7 +9,7 @@ export default function ContactList(task) {
     const filter = useSelector(getFilter);
     const dispatch = useDispatch();
 
-    const getFilteredContacts = () => {
+    const visibleContacts = () => {
         if (!filter) {
             return contacts;
         }
@@ -19,20 +17,18 @@ export default function ContactList(task) {
         return contacts.filter(({name}) => name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
     }
 
-    const contactsToRender = getFilteredContacts()
-
-    const handleDelete = () => dispatch(deleteTask(task.id));
+    const getVisibleContacts = visibleContacts()
     
     return (
         <NewContactsList>
-            {contactsToRender.map(item =>(
+            {getVisibleContacts.map((item) =>(
                 <ContactEl key={item.id}>
                     <p>
                         {item.name}: {item.number}
                     </p>
                     <ButtonDelete
                         type="button"
-                        onClick={handleDelete}
+                        onClick={() => dispatch(deleteTask(item.id))}
                     >Delete
                     </ButtonDelete>
                 </ContactEl>
