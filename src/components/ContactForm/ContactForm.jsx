@@ -42,6 +42,8 @@ export const ContactForm = () => {
        alert("Enter the contact's name and number phone!");
         } else {
         dispatch(addTask({name, number}))
+            setName("");
+            setNumber("");
     }
     }
 
@@ -49,9 +51,6 @@ export const ContactForm = () => {
     event.preventDefault();
 
     addContactToList(name, number);
-
-    setName("");
-    setNumber("");
     };
 
   return (
